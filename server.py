@@ -79,8 +79,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     while True:
         s.listen() # listen for input
         conn, addr = s.accept() # accept the input
-        with conn:
-            data = conn.recv(8) # get the data
-            out = struct.unpack('!Q', data)[0] # unpact the data and get the int inside of it
+        while True:
+            data = conn.recv(4) # get the data
+            out = struct.unpack('!I', data)[0] # unpact the data and get the int inside of it
             parse(out) # parse the input
-            
