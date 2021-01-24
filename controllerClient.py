@@ -47,3 +47,4 @@ while True:
     key_mask = _ctru.hid_keys_held() # get held keys
     if old_mask != key_mask:
         update(key_mask) # tell the server about the change
+    old_mask = key_mask
