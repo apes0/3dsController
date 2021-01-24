@@ -30,6 +30,8 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # create a socket
 port = config['port'] # get the port of the server
 host = config['host'] # get the ip adress of the server
 
+s.connect((host, port,))
+
 def update(key_mask):
     packed = struct.pack('!I', key_mask)
 
