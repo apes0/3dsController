@@ -35,7 +35,7 @@ s.connect((host, port,))
 def update(key_mask):
     packed = struct.pack('!I', key_mask)
 
-    print('sending buttons', flush=True)
+    print(f'sending buttons ({key_mask})', flush=True)
     s.sendall(packed) # send request
 
 print('done loading', flush=True)
