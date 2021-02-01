@@ -48,10 +48,12 @@ for i in range(len(options)): # print all options
     opt = options[i]
     print(f'{i}. {opt[:-5]}')
 
-opt = int(input('choose a config to use: '))
+opt = input('choose a config to use: ')
 
 if not opt:
     opt = config['default'] # get the defualt config if none is specified
+
+opt = int(opt)
 
 rel_path = options[opt] # get file name
 abs_file_path = os.path.join(script_dir, 'configs', rel_path) # open the config file

@@ -30,6 +30,8 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # create a socket
 port = config['port'] # get the port of the server
 host = config['host'] # get the ip adress of the server
 
+print(f'connecting to {host} at {port}')
+
 s.connect((host, port,))
 
 def update(key_mask):
@@ -37,8 +39,6 @@ def update(key_mask):
 
     print(f'sending buttons ({key_mask})', flush=True)
     s.sendall(packed) # send request
-
-print('done loading', flush=True)
 
 old_mask = 0
 
