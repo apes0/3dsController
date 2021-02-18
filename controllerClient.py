@@ -40,11 +40,17 @@ def update(key_mask):
     print(f'sending buttons ({key_mask})', flush=True)
     s.sendall(packed) # send request
 
+wait_frames = config['delay']
+
 old_mask = 0
+frames = wait_frames
+
 
 while True:
     _ctru.hid_scan_input()
     key_mask = _ctru.hid_keys_held() # get held keys
-    if old_mask != key_mask:
+    if old_mask != key_mask and frames > wait_frames:
         update(key_mask) # tell the server about the change
+        frames = 0
     old_mask = key_mask
+    frames += 1
