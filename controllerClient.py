@@ -32,18 +32,18 @@ host = config['host'] # get the ip adress of the server
 
 print(f'connecting to {host} at {port}')
 
-s.connect((host, port,))
+s.connect((host, port,)) # connect to the server
 
 def update(key_mask):
-    packed = struct.pack('!I', key_mask)
+    packed = struct.pack('!I', key_mask) # pack the current key mask
 
     print(f'sending buttons ({key_mask})', flush=True)
     s.sendall(packed) # send request
 
-wait_frames = config['delay']
+wait_frames = config['delay'] # frames to wait between checking inputs
 
-old_mask = 0
-frames = wait_frames
+old_mask = 0 # old key mask
+frames = wait_frames # frame counter for the time from the last input
 
 
 while True:
@@ -51,6 +51,6 @@ while True:
     key_mask = _ctru.hid_keys_held() # get held keys
     if old_mask != key_mask and frames > wait_frames:
         update(key_mask) # tell the server about the change
-        frames = 0
-    old_mask = key_mask
-    frames += 1
+        frames = 0 # set the old frame counter to 0
+    old_mask = key_mask # set the old keymask to the current one
+    frames += 1 # increase the frame counter
