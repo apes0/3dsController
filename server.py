@@ -61,22 +61,24 @@ with open(abs_file_path) as f:
     buttons = json.loads(f.read())
 
 pressed = [] # all pressed buttons
+values = [] # values of all pressed buttons
 
 def parse(inp):
-    for value in buttons.keys():
-        button = buttons[value] # get button to click
+    for value, button in buttons.items():
         value = int(value) # get button value
         if value & int(inp): # check if the bites are the same
-            if value not in pressed: # this if is inside, so that we dont trigger the elif
-                pressed.append(value) # add the button to the list with pressed buttons
+            if value not in values: # check if the button is already pressed
                 keyboard.press(button) # press the button
                 print(f'pressing {button} ({value})')
-        elif value in pressed: # check if the button was pressed, but isn't anyomre
-            pressed.remove(value) # remove the button from the list wit hpressed buttons
-            keyboard.release(button) # release the button
-            print(f'releasing {button} ({value})')
-#        print(pressed, value, button)
-
+                pressed.append(button) # add the button to the list with pressed buttons
+                values.append(value) # add the button to the list with the values of all buttons
+        elif value in values: # check if the button was pressed, but isn't anyomre
+            pressed.remove(button) # remove the button from the list wit hpressed buttons
+            if button not in pressed: # check if the button should not remain pressed
+                keyboard.release(button) # release the button
+                print(f'releasing {button} ({value})')
+            values.remove(value) # remove the button from the list with all values
+        print(pressed, value, button)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     def signal_handler(_, __):
