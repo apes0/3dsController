@@ -18,6 +18,7 @@ import os
 import json
 import struct
 
+
 script_dir = os.path.dirname(__file__)  # get script directory
 
 rel_path = 'clientConfig.json'
@@ -25,20 +26,22 @@ abs_file_path = os.path.join(script_dir, rel_path) # open the config file for th
 with open(abs_file_path) as f:
     config = json.loads(f.read())
 
+
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # create a socket
 
 port = config['port'] # get the port of the server
 host = config['host'] # get the ip adress of the server
 
 print(f'connecting to {host} at {port}')
-
 s.connect((host, port,)) # connect to the server
+
 
 def update(key_mask):
     packed = struct.pack('!I', key_mask) # pack the current key mask
 
     print(f'sending buttons ({key_mask})', flush=True)
     s.sendall(packed) # send request
+
 
 wait_frames = config['delay'] # frames to wait between checking inputs
 
