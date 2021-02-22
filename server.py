@@ -78,7 +78,7 @@ def parse(inp):
                 keyboard.release(button) # release the button
                 print(f'releasing {button} ({value})')
             values.remove(value) # remove the button from the list with all values
-        print(pressed, value, button)
+#        print(pressed, value, button)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     def signal_handler(_, __):
