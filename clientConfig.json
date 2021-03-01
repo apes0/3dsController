@@ -1,5 +1,6 @@
 {
     "port": 8080,
     "host": "10.42.0.2",
-    "delay": 2
+    "delay": 2,
+    "reconnect": 5
 }

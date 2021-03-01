@@ -26,6 +26,7 @@
 # all the config variables are in serverConfig.json
 # button mappings are stored in the folder "configs"
 
+
 import os
 import json
 import keyboard
@@ -34,12 +35,16 @@ import struct
 import signal
 import sys
 
+
+
 script_dir = os.path.dirname(__file__)  # get script directory
 
 rel_path = 'serverConfig.json'
 abs_file_path = os.path.join(script_dir, rel_path) # open the config file for the server
 with open(abs_file_path) as f:
     config = json.loads(f.read())
+
+
 
 options = os.listdir(os.path.join(script_dir, 'configs')) # find all config files
 
@@ -60,6 +65,8 @@ abs_file_path = os.path.join(script_dir, 'configs', rel_path) # open the config 
 with open(abs_file_path) as f:
     buttons = json.loads(f.read())
 
+
+
 pressed = [] # all pressed buttons
 values = [] # values of all pressed buttons
 
@@ -79,6 +86,8 @@ def parse(inp):
                 print(f'releasing {button} ({value})')
             values.remove(value) # remove the button from the list with all values
 #        print(pressed, value, button)
+
+
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     def signal_handler(_, __):
