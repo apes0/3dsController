@@ -64,7 +64,7 @@ def reconnect():
             return
         sleep(5) # wait for 5 seconds untill reconnecting
         delay -= 1
-    exit() # exit if the connection never comes back
+    raise "can not reconnect..."
 
 
 
